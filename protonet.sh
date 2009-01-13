@@ -3,7 +3,7 @@
 
 ## == Installing linux on the node using pxelinux == ##
 
-sudo port install dhcp
+sudo port install dnsmasq
 sudo port install tftp-hpa
 
 ## == Configuring the dhcp server == ##
@@ -64,22 +64,19 @@ sudo tftpd -L -s /opt/local/var/tftpboot
 sudo wget http://archive.ubuntu.com/ubuntu/dists/intrepid/main/installer-i386/current/images/netboot/netboot.tar.gz
 sudo tar xvf netboot.tar.gz
 
-== Appendix  ==
+## == Appendix  == ##
 
-DHCPd
-
+# dnsmasq
 ###########################################################
 # A startup item has been generated that will aid in
-# starting dhcp with launchd. It is disabled
+# starting dnsmasq with launchd. It is disabled
 # by default. Execute the following command to start it,
 # and to cause it to launch at startup:
 #
-# sudo launchctl load -w /Library/LaunchDaemons/org.macports.dhcpd.plist
+# sudo launchctl load -w /Library/LaunchDaemons/org.macports.dnsmasq.plist
 ###########################################################
 
-
-TFTPd
-
+# TFTPd
 # ***** Setup Instructions *****
 # NOTE: By default, tftp-hpa listens to the tftp port specified in /etc/services (port 69)
 #       on all local addresses.
