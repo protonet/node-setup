@@ -8,6 +8,15 @@
 HOSTAP_DEFAULT=/etc/default/hostapd
 sed -i -e 's/#RUN_DAEMON="yes"/RUN_DAEMON="yes"/' $HOSTAP_DEFAULT
 perl -i -pe 's/^#DAEMON_CONF/DAEMON_CONF/' $HOSTAP_DEFAULT
+
+echo 'protonet' > /etc/hostname
+perl -i -pe "s/`uname -n`/protonet/" /etc/motd
+# replace second line of hosts with 127.0.0.1 protonet
+perl -i -ple '$_ = "127.0.0.1 protonet" if $. == 2 ; close ARGV if eof' /etc/hosts
+# regenerate host ssh keys
+rm /etc/ssh/ssh_host*
+dpkg-reconfigure openssh-server
+
 # backup default config
 cp /etc/hostapd/hostapd.conf /etc/hostapd/hostapd.conf.orig
 
