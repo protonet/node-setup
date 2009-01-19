@@ -4,3 +4,16 @@ The preseed must be seeded through url in the pxelinux.cfg/default
 currently I use my host at flyingseagull.de/assets/preseed.cfg
 
 The right way to do it is to put it in the root of the initrd.
+
+
+== Hostname conventions ==
+
+we're going to use a sha1 hash based on the nic mac and the date
+
+
+== Mass installation ==
+
+for mass installing we cannot use the inet for retrieving the packages
+therefore you need to use rsync to mirror the ubuntu packages
+
+
