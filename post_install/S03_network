@@ -1,0 +1,40 @@
+#!/bin/sh
+
+
+echo '# trusted interface
+auto ath0
+iface ath0 inet static
+        # ensure ath0 is down (never fails because of "true")
+        pre-up wlanconfig ath0 destroy || true
+        # set up the ath0 device in AP mode before bringing up the interface (unless youre using AutoCreate)
+        pre-up wlanconfig ath0 create wlandev wifi0 wlanmode ap
+        # remove the ath0 device when bringing the interface down
+        post-down wlanconfig ath0 destroy
+        # now the address infos
+        address 10.42.2.1
+        netmask 255.255.255.0
+        broadcast 10.42.2.255
+        wireless-essid priv-protonet-1
+        wireless-mode master
+        wireless-key f2d6200dd9 # well, not really, use yours.
+
+# guest interface
+auto ath1
+iface ath1 inet static
+        # ensure ath1 is down (never fails because of "true")
+        pre-up wlanconfig ath1 destroy || true
+        # set up the ath1 device in AP mode before bringing up the interface (unless youre using AutoCreate)
+        pre-up wlanconfig ath1 create wlandev wifi0 wlanmode ap
+        # remove the ath1 device when bringing the interface down
+        post-down wlanconfig ath1 destroy
+        # now the address infos
+        address 10.42.1.1
+        netmask 255.255.255.0
+        broadcast 10.42.1.255
+        wireless-essid free-protonet-1
+        wireless-mode master
+
+        # wireless-key 1223-1234-1234-1234 # well, not really, use yours.' >> /etc/network/interfaces
+        
+echo 'options ath_pci autocreate=none' >> /etc/modprobe.d/options
+

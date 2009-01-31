@@ -1,0 +1,35 @@
+#!/bin/sh
+
+
+###
+# HOSTAP settings
+# allow hostapd to launch automaticall
+#
+HOSTAP_DEFAULT=/etc/default/hostapd
+# don't enable hostap by default
+# sed -i -e 's/#RUN_DAEMON="yes"/RUN_DAEMON="yes"/' $HOSTAP_DEFAULT
+# perl -i -pe 's/^#DAEMON_CONF/DAEMON_CONF/' $HOSTAP_DEFAULT
+
+# backup default config
+cp /etc/hostapd/hostapd.conf /etc/hostapd/hostapd.conf.orig
+
+echo 'interface=ath0
+bridge=br.eth1
+driver=madwifi
+logger_syslog=-1
+logger_syslog_level=2
+logger_stdout=-1
+logger_stdout_level=2
+debug=0
+dump_file=/tmp/hostapd.dump
+ctrl_interface=/var/run/hostapd
+ctrl_interface_group=0
+ssid=protonet
+auth_algs=3
+eapol_key_index_workaround=0
+eap_server=0
+wpa=3
+wpa_key_mgmt=WPA-PSK
+wpa_pairwise=TKIP CCMP
+wpa_passphrase=helloworld' > /etc/hostapd/hostapd.conf
+
