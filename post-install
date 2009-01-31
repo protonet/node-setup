@@ -2,7 +2,7 @@
 
 # the archive of the post-install scripts
 POST_ARCH = "http://www.flyingseagull.de/assets/post_install.tar.bz2"
-POST_DIR = ~/.post_install
+POST_DIR = ~/post_install
 
 mkdir $POST_DIR
 cd $POST_DIR
