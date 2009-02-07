@@ -1,20 +1,22 @@
 #!/bin/sh
 
 # the archive of the post-install scripts
-POST_ARCH = "http://www.flyingseagull.de/assets/post_install.tar.bz2"
-POST_DIR = ~/post_install
+POST_ARCH=post_install.tar.bz2
+POST_SERV="http://www.flyingseagull.de/assets/$POST_ARCH"
+POST_DIR=~/post_install
 
 mkdir $POST_DIR
 cd $POST_DIR
 
 # get and extract the post-install scripts
-wget $POST_ARCH
+wget $POST_SERV
 tar xjvf $POST_ARCH
 
 # TODO: sign the releases so we can make sure ppl don't put malicious code
 # in our deployment scripts
 
-for post_install in $POST_DIR/S[0-9][0-9]*[^~] ; do
+shopt -s extglob
+for post_install in $POST_DIR/+(S[0-9][0-9]*[^~]) ; do
   bash $post_install
 done
 
