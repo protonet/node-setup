@@ -5,9 +5,6 @@ POST_ARCH=post_install.tar.bz2
 POST_SERV="http://www.flyingseagull.de/assets/$POST_ARCH"
 POST_DIR=~/post_install
 
-mkdir $POST_DIR
-cd $POST_DIR
-
 # get and extract the post-install scripts
 wget $POST_SERV
 tar xjvf $POST_ARCH
