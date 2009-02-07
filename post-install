@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # the archive of the post-install scripts
 POST_ARCH=post_install.tar.bz2
