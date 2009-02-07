@@ -16,4 +16,7 @@ we're going to use a sha1 hash based on the nic mac and the date
 for mass installing we cannot use the inet for retrieving the packages
 therefore you need to use rsync to mirror the ubuntu packages
 
+== darkstat ==
 
+the new version should support multiple interfaces. it's not yet in
+the ubuntu repo, so ideally we should start our own protonet repo
