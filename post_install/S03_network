@@ -2,6 +2,8 @@
 
 mv iptables /etc
 
+perl -i -pe 's/^#net.ipv4.ip_forward/net.ipv4.ip_forward/' /etc/sysctl.conf
+
 echo '# This file describes the network interfaces available on your system
 # and how to activate them. For more information, see interfaces(5).
 
