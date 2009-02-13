@@ -1,0 +1,91 @@
+#!/bin/bash
+#
+# This is the PROTONET iptables configuration file, I basically use it to generate the setting, it is then used
+# to save it and call it from the /etc/network.interfaces file, loopback device, it is adapted from
+# http://www.linuxhomenetworking.com/wiki/index.php/Quick_HOWTO_:_Ch14_:_Linux_Firewalls_Using_iptables
+# and changed to suit my needs.
+# 
+# WHAT'S THE PLAN:
+# The most important thing you have to do is to ask yourself: what are the potential users, and what are they allowed to do.
+# So here it is:
+# * A trusted user (a user connecting securly with the internal private interface):
+#   - is allowed to access the local network, of course including the node itself
+#   - is allowed to access the network connected to the external interface (EXTIF)
+#   - is allowed to access the internet
+# * An anonymous unauthenticated user (a user connecting insecurely with the internal public interface who hasn't authenticated himself
+# on the nodes web interface) 
+#   - is allowed to access the node itself
+#   - is not allowed to access the local network
+#   - is not allowed to access the network connected to the external interface
+#   - is not allowed to access the internet
+#   - is automatically redirected to the nodes web interface on www request to any destination (pre-routing)
+
+
+
+# The location of the iptables and kernel module programs
+#
+IPT=/sbin/iptables
+
+#Setting the EXTERNAL and INTERNAL interfaces for the network
+EXTIF="eth0"
+PUBIF="ath1"
+PRVIF="ath0"
+# all INTERNAL interfaces
+ALLINTIFS=( $PUBIF $PRVIF )
+
+echo "   External Interface:          $EXTIF"
+echo "   Internal PUBLIC Interface:   $PUBIF"
+echo "   Internal PRIVATE Interface:  $PRVIF"
+
+echo "   Clearing any existing rules and setting default policy.."
+  $IPT -P INPUT ACCEPT
+  $IPT -F INPUT 
+  $IPT -P OUTPUT ACCEPT
+  $IPT -F OUTPUT 
+  $IPT -P FORWARD DROP
+  $IPT -F FORWARD
+  $IPT -F unknown_user
+  $IPT -F known_user_internet_allowed 
+  $IPT -t nat -F
+
+echo "   Creating our own chains (unknown_user and known_user_internet_allowed)"
+  $IPT -N unknown_user
+  $IPT -N known_user_internet_allowed
+
+echo "   Creating unknown_user chain and setting its rules.."
+  # accept allow tcp:80, and udp:53 (dns) requests
+  $IPT -A unknown_user -p tcp -m tcp --dport 80 -j ACCEPT
+  $IPT -A unknown_user -p udp -m udp --dport 53 -j ACCEPT 
+  # drop the rest
+  $IPT -A unknown_user -j DROP
+  
+echo "   Creating known_user_internet_allowed chain and setting its rules.."
+  # allowing established connections + outbound stuff, log the rest
+  # for all internal interface... some refact might be needed as some point
+  for iface in ${ALLINTIFS[@]}
+  do
+    echo "   ... setting rules for $iface ..."
+    $IPT -A known_user_internet_allowed -i $EXTIF -o $iface -m state --state ESTABLISHED,RELATED -j ACCEPT
+    $IPT -A known_user_internet_allowed -i $iface -o $EXTIF -j ACCEPT    
+  done
+  $IPT -A known_user_internet_allowed -j LOG
+  echo "   known_user_internet_allowed chain is ready!"
+
+
+echo "   Route PUBLIC IFACE ($PUBIF) traffic to unknown_user chain by default.."
+  # unknown users will be redirected to the dashboard, all other traffic will be dropped
+  # this redirects the tcp:80 packets, also I couldn't leave it in the unknown_user chain it
+  # seems
+  $IPT -t nat -A PREROUTING -i $PUBIF -p tcp -m tcp --dport 80 -j DNAT --to-destination 10.42.1.1:80
+  # all traffic is being sent to the unknown_user chain
+  $IPT -A INPUT -i $PUBIF -j unknown_user
+
+
+echo "   Route PRIVATE IFACE ($PRVIF) traffic to known_user_internet_allowed.."
+  # yeah not very beautiful but it does work (also I know what happens here - no magic :))
+  $IPT -A FORWARD -i $EXTIF -o $PRVIF -j known_user_internet_allowed
+  $IPT -A FORWARD -i $PRVIF -o $EXTIF -j known_user_internet_allowed
+
+
+echo "   Enabling SNAT (MASQUERADE) functionality on $EXTIF"
+  $IPT -t nat -A POSTROUTING -o $EXTIF -j MASQUERADE

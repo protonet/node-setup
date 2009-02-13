@@ -1,7 +1,19 @@
 #!/bin/sh
 
+mv iptables /etc
 
-echo '# trusted interface
+echo '# This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+auto eth0
+iface eth0 inet dhcp
+pre-up iptables-restore < /etc/iptables/iptables.protonet.rules
+
+# trusted interface
 auto ath0
 iface ath0 inet static
         # ensure ath0 is down (never fails because of "true")
@@ -34,7 +46,7 @@ iface ath1 inet static
         wireless-essid free-protonet-1
         wireless-mode master
 
-        # wireless-key 1223-1234-1234-1234 # well, not really, use yours.' >> /etc/network/interfaces
+        # wireless-key 1223-1234-1234-1234 # well, not really, use yours.' > /etc/network/interfaces
         
 echo 'options ath_pci autocreate=none' >> /etc/modprobe.d/options
 
