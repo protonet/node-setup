@@ -7,4 +7,5 @@ POST_DIR=~/dashboard
 
 # get and extract the dashboard app
 wget --no-check-certificate $POST_SERV
-tar xjvf $POST_ARCH
+tar xjvf $POST_ARCH ./dashboard
+rm -rf $POST_ARCH
