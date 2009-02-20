@@ -2,7 +2,7 @@
 
 # the archive of the post-install scripts
 POST_ARCH=post_install.tar.bz2
-POST_SERV="http://deploy.flyingseagull.de/assets/$POST_ARCH"
+POST_SERV="https://deploy.flyingseagull.de/assets/$POST_ARCH"
 POST_DIR=~/post_install
 
 # get and extract the post-install scripts
