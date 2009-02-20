@@ -1,7 +1,8 @@
 == Preseed ==
 
 The preseed must be seeded through url in the pxelinux.cfg/default
-currently I use my host at flyingseagull.de/assets/preseed.cfg
+The deploy procedure now properly passes through, while deploying
+through dnsmasq and lighttpd
 
 The right way to do it is to put it in the root of the initrd.
 

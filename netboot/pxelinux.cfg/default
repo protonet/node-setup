@@ -5,4 +5,4 @@ PROMPT 0
 LABEL install
   menu label ^Install Ubuntu Server
   kernel install/linux
-  append  locale=en_US console-setup/layoutcode=us netcfg/choose_interface=eth0 netcfg/get_hostname=protonet preseed/url=https://deploy.flyingseagull.de/assets/preseed.cfg initrd=install/initrd.gz quiet --
+  append  locale=en_US console-setup/layoutcode=us netcfg/choose_interface=eth0 netcfg/get_hostname=protonet preseed/url=http://protodeploy/preseed.cfg initrd=install/initrd.gz quiet --
