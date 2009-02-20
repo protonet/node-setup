@@ -6,7 +6,7 @@ POST_SERV="https://deploy.flyingseagull.de/assets/$POST_ARCH"
 POST_DIR=~/post_install
 
 # get and extract the post-install scripts
-wget $POST_SERV
+wget --no-check-certificate $POST_SERV
 tar xjvf $POST_ARCH
 
 # TODO: sign the releases so we can make sure ppl don't put malicious code
