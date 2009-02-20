@@ -24,4 +24,6 @@ if [ ! -e /opt/local/var/db ]; then
   sudo mkdir /opt/local/var/db;
 fi;
 
+sudo lighttpd -f /opt/local/etc/lighttpd/lighttpd.conf
 sudo /opt/local/sbin/dnsmasq -d
+sudo killall lighttpd
