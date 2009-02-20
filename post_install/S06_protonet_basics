@@ -2,6 +2,7 @@
 
 # install git
 apt-get -y install git-core
+hash -r
 
 # lot of this comes from the fiveruns blog
 # check for prerequisites
