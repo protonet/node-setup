@@ -27,6 +27,13 @@ if [ ! -e /opt/local/var/db ]; then
   sudo mkdir /opt/local/var/db;
 fi;
 
+if [ ! -e /opt/local/var/squid/cache ]; then
+  sudo squid -z
+fi;
+
+sudo cp conf/squid.conf /opt/local/etc/squid/
+
 sudo lighttpd -f /opt/local/etc/lighttpd/lighttpd.conf
+sudo squid
 sudo /opt/local/sbin/dnsmasq -d
 sudo killall lighttpd
