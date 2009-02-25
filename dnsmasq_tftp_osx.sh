@@ -11,6 +11,7 @@ DNSMASQCONF=/opt/local/etc/dnsmasq.conf
 
 sudo port install dnsmasq
 sudo port install lighttpd
+sudo port install squid
 
 # lighty stuff
 sudo mkdir -p /opt/local/var/lighttpd/log
