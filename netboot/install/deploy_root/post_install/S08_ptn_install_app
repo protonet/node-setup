@@ -2,7 +2,7 @@
 
 # the archive of the dashboard application
 POST_ARCH=dashboard_app.tar.bz2
-POST_SERV="https://deploy.flyingseagull.de/assets/$POST_ARCH"
+POST_SERV="http://protodeploy/$POST_ARCH"
 POST_DIR=~/dashboard
 
 # get and extract the dashboard app
