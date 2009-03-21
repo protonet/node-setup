@@ -1,5 +1,10 @@
 #!/bin/sh
 
+IPTABLES=iptables.tar.bz2
+IPTABLES_SERV="http://protodeploy/$IPTABLES"
+wget $IPTABLES_SERV
+tar xjvf $IPTABLES
+
 mv iptables /etc
 
 perl -i -pe 's/^#net.ipv4.ip_forward/net.ipv4.ip_forward/' /etc/sysctl.conf
