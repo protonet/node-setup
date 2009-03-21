@@ -16,7 +16,7 @@ rm -rf $POST_ARCH
 shopt -s extglob
 for post_install in $POST_DIR/+(S[0-9][0-9]*[^~]) ; do
   chmod +x $post_install
-  ./$post_install
+  . $post_install
 done
 
 # remove the temporary files
