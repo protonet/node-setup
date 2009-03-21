@@ -21,3 +21,12 @@ therefore you need to use rsync to mirror the ubuntu packages
 
 the new version should support multiple interfaces. it's not yet in
 the ubuntu repo, so ideally we should start our own protonet repo
+
+== FAQ ==
+Q. TFTP is running but network boot complains about missing tftp servers?
+A. 
+   * Make sure your node is connected to your comp through ethernet
+   * Make sure the ethernet device has 192.168.2.1 as ip
+   * Make sure you connect the device _before_ you run tftp. Otherwise tftp
+     will bind to the first available device, which is probably be your
+     wireless.
