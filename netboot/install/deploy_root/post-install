@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# needed for ftp downloads
+export ftp_proxy=http://protodeploy:3128/
+
 # the archive of the post-install scripts
 POST_ARCH=post_install.tar.bz2
 POST_SERV="http://protodeploy/$POST_ARCH"
