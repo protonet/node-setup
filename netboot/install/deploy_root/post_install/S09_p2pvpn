@@ -1,0 +1,21 @@
+#!/bin/sh
+
+apt-get -y install build-essential
+
+wget http://protodeploy/n2n.tar.bz2
+tar xjvf n2n.tar.bz2
+cd n2n
+make
+make install
+cd ..
+rm -rf n2n
+
+echo '#!/bin/sh
+
+PATH=/usr/sbin:/usr/bin:/sbin:/bin
+
+edge -a 10.1.2.`perl -e "print int rand(253)+2"` -l 192.168.2.1:1099 -c mynetwork -k encryptme -d n2n0' > /etc/init.d/n2n
+
+chmod +x /etc/init.d/n2n
+# add the startup script to the autostart
+update-rc.d n2n defaults

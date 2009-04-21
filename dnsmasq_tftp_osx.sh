@@ -22,13 +22,13 @@ sudo cp conf/dnsmasq.conf $DNSMASQCONF
 sudo mkdir -p /opt/local/var/tftpboot
 sudo cp -r netboot/* /opt/local/var/tftpboot
 
-bash update_post_install.sh
+sudo bash update_post_install.sh
 
 if [ ! -e /opt/local/var/db ]; then
   sudo mkdir /opt/local/var/db;
 fi;
 
-if [ ! -e /opt/local/var/squid/cache ]; then
+if [ ! -e /opt/local/var/squid/cache/00 ]; then
   sudo squid -z
 fi;
 
