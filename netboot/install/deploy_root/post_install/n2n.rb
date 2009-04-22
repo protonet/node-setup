@@ -77,7 +77,7 @@ when "list" then
   # apparently we need 2 forks here to actually run the process in the background
   fork do
     fork do
-      system "/usr/bin/edge -a 10.1.2.2 -c mynetwork -k encryptme -l #{address}"
+      system "/usr/bin/edge -d n2n0 -a 10.1.2.2 -c mynetwork -k encryptme -l #{address}"
     end
   end
 when "groupup" then
