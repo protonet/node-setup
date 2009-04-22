@@ -14,7 +14,7 @@ rm -rf n2n
 
 echo '#!/bin/sh
 
-PATH=/usr/sbin:/usr/bin:/sbin:/bin
+PATH=/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 /usr/bin/n2n list' > /etc/init.d/n2n
 
