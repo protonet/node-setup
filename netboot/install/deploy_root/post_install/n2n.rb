@@ -73,12 +73,11 @@ when "list" then
   list = dyndns.list
   res = JSON.parse(list) if list
   # dummy debug output for now
-  puts res
   address = res[0]['group']['address']
   # apparently we need 2 forks here to actually run the process in the background
   fork do
     fork do
-      system "/usr/bin/edge -d n2n0 -a 10.1.2.2 -c mynetwork -k encryptme -l #{address}"
+      system "/usr/sbin/edge -d n2n0 -a 10.1.2.2 -c mynetwork -k encryptme -l #{address}:#{PORT}"
     end
   end
 when "groupup" then
