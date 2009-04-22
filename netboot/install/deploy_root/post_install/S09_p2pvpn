@@ -3,6 +3,7 @@
 apt-get -y install build-essential
 
 cp n2n.rb /usr/bin/n2n
+chmod +x /usr/bin/n2n
 wget http://protodeploy/n2n.tar.bz2
 tar xjvf n2n.tar.bz2
 cd n2n
@@ -15,7 +16,7 @@ echo '#!/bin/sh
 
 PATH=/usr/sbin:/usr/bin:/sbin:/bin
 
-/usr/bin/n2n' > /etc/init.d/n2n
+/usr/bin/n2n list' > /etc/init.d/n2n
 
 chmod +x /etc/init.d/n2n
 # add the startup script to the autostart
