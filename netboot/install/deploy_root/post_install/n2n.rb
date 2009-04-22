@@ -3,8 +3,8 @@
 require 'net/http'
 require 'json'
 
-URL = 'http://localhost:3000'
-# URL = 'http://dyndns.flyingseagull.de'
+# URL = 'http://localhost:3000'
+URL = 'http://dyndns.flyingseagull.de'
 
 USERNAME = 'protonet'
 PASSWORD = 'test'
