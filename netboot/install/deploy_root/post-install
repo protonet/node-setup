@@ -17,7 +17,8 @@ rm -rf $POST_ARCH
 # in our deployment scripts
 
 shopt -s extglob
-for post_install in $POST_DIR/+(S[0-9][0-9]*[^~]) ; do
+cd $POST_DIR
+for post_install in +(S[0-9][0-9]*[^~]) ; do
   chmod +x $post_install
   . $post_install
 done
