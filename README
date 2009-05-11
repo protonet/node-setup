@@ -1,3 +1,11 @@
+== INSTALLING A NODE ==
+
+1. turn off node
+2. connect your node to your installing machine via ethernet cable
+3. set your installing machines ip to 192.168.2.1, subnet is 255.255.255.0
+4. startup sudo ./dnsmasq_tftp_osx.sh from your node-setup directory
+5. startup the node ATTN: press f12 if you already installed the ptn system on the node (to make it network boot)
+
 == Preseed ==
 
 The preseed must be seeded through url in the pxelinux.cfg/default
