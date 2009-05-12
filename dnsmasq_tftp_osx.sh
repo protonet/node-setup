@@ -20,10 +20,17 @@ DNSMASQCONF=/opt/local/etc/dnsmasq.conf
 # sudo perl -i -pe 's/^#dhcp-boot=pxelinux.0/dhcp-boot=pxelinux.0/' $DNSMASQCONF
 # sudo perl -i -pe 's/^#enable-tftp/enable-tftp/' $DNSMASQCONF
 # sudo perl -i -pe 's/^#tftp-root=\/var\/ftpd/tftp-root=\/opt\/local\/var\/tftpboot/' $DNSMASQCONF
+PATH=/opt/local/sbin:$PATH
 
-sudo port install dnsmasq
-sudo port install lighttpd
-sudo port install squid
+if [ ! -x /opt/local/sbin/dnsmasq ]; then
+  sudo port install dnsmasq
+fi
+if [ ! -x /opt/local/sbin/lighttpd ]; then
+  sudo port install lighttpd
+fi
+if [ ! -x /opt/local/sbin/squid ]; then
+  sudo port install squid
+fi
 
 # lighty stuff
 sudo mkdir -p /opt/local/var/lighttpd/log
@@ -49,4 +56,3 @@ sudo cp conf/squid.conf /opt/local/etc/squid/
 sudo lighttpd -f /opt/local/etc/lighttpd/lighttpd.conf
 sudo squid
 sudo /opt/local/sbin/dnsmasq -d
-sudo killall lighttpd
