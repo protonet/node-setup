@@ -1,4 +1,16 @@
-#!/bin/sh
+#!/bin/bash
+trap bashtrap INT
+
+# bash clear screen command
+clear;
+# bash trap function is executed when CTRL-C is pressed:
+# bash prints message => Executing bash trap subrutine !
+bashtrap()
+{
+  echo "CTRL+C Detected !...executing bash trap !"
+  sudo squid -k kill
+  sudo killall lighttpd
+}
 
 # set ethernet to 192.168.2.1 in sharing preferences
 DNSMASQCONF=/opt/local/etc/dnsmasq.conf
