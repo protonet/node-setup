@@ -25,3 +25,10 @@ done
 
 # remove the temporary files
 # rm -rf $POST_DIR
+
+# added to remove proxy from apt after installation
+# should do the same as if you would set: 
+# Acquire::http::Proxy "false";
+# in that file
+echo '' > /etc/apt/apt.conf
+
