@@ -35,6 +35,3 @@ apt-get -y install apache2
 
 # getting the db
 apt-get -y install sqlite3 libsqlite3-dev
-
-# install merb
-/usr/local/bin/gem install merb
