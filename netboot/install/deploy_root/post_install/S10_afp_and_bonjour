@@ -1,0 +1,52 @@
+#!/bin/sh
+
+# http://www.zaphu.com/2008/04/29/ubuntu-guide-configure-a-netatalk-file-server-based-on-apple-filing-protocol-afp/
+# http://www.zaphu.com/2008/04/29/ubuntu-guide-configure-avahi-to-broadcast-services-via-bonjour-to-mac-os-x/
+# ATTN: we need to build this frickin' thing by frickin' hand:
+
+cd
+
+sudo aptitude install cracklib2-dev libssl-dev
+
+mkdir netatalk
+cd netatalk
+apt-get source netatalk
+
+# Now, move to the source code directory (the version number may change), switch to the root user, resolve and install the build dependencies for Netatalk, and build with the SSL option enabled (I’ve included several build options to suppress some error messages that arise because the build is not signed). The last commands below install the build and exit the root user.
+cd netatalk-2.0.3
+sudo su
+apt-get build-dep netatalk
+DEB_BUILD_OPTIONS=ssl debuild -i -us -uc -b
+
+#  todo manual
+# sudo vim /etc/netatalk/atalkd.conf
+#  and add:
+#  eth0
+#  n2n0
+debi
+# exit from root
+exit 
+
+sudo aptitude install avahi-daemon
+
+# make it autostart
+sudo update-rc.d avahi-daemon defaults
+
+# sudo vim /etc/avahi/services/afpd.service
+
+# <?xml version="1.0" standalone='no'?><!--*-nxml-*-->
+# <!DOCTYPE service-group SYSTEM "avahi-service.dtd">
+# <service-group>
+# <name replace-wildcards="yes">%h</name>
+# <service>
+# <type>_afpovertcp._tcp</type>
+# <port>548</port>
+# </service>
+# </service-group>
+
+# sudo /etc/init.d/avahi-daemon restart
+
+# for debug purposes
+# sudo apt-get install mdns-scan
+
+# TEST : you can see the folder for protonet in the finder

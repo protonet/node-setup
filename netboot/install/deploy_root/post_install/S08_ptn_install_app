@@ -9,3 +9,15 @@ POST_DIR=~/dashboard
 wget --no-check-certificate $POST_SERV
 tar xjvf $POST_ARCH ./dashboard
 rm -rf $POST_ARCH
+
+
+# todo: need to install app gems
+# rake gems:install
+
+# todo: need to create the production db
+# RAILS_ENV=production rake db:create
+
+# todo: restart the app if needed
+
+# todo: rabbitmq should have been started already now start the dispatching server in the production env
+# RAILS_ENV=production messaging/event_machine/js_dispatching_server.rb

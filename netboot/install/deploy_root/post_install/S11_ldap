@@ -1,0 +1,20 @@
+#!/bin/sh
+
+# LDAP SERVER INSTALLATION
+
+# ldap base installation, adapted from 
+sudo apt-get install slapd ldap-utils
+
+# later on you might want to reconfigure
+# sudo dpkg-reconfigure slapd
+
+# see wether things work
+# ldapsearch -x -b dc=protonet,dc=info
+
+# LDAP CLIENT INSTALLATION
+# https://help.ubuntu.com/community/LDAPClientAuthentication
+# above didn't really work
+# http://moduli.net/sysadmin/sarge-ldap-auth-howto.html
+
+sudo apt-get install libpam-ldap libnss-ldap nss-updatedb libnss-db
+sudo apt-get install ldap-utils libpam-ldap libnss-ldap nscd

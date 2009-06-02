@@ -31,7 +31,31 @@ cd ..
 rm -rf $RUBYGEMS
 
 # how about a webserver ;)
-apt-get -y install apache2
+apt-get -y install apache2 apache2-threaded-dev
 
 # getting the db
 apt-get -y install sqlite3 libsqlite3-dev
+
+# add github as source
+gem sources -a http://gems.github.com
+
+# installing the apps gems
+sudo gem install jeremymcanally-context faker random_data mocha configatron sprockets ruby-debug
+
+sudo gem install passenger
+
+# todo: add later or something similar, this is interactive
+# sudo passenger-install-apache2-module
+
+# todo: add the following to apache config: /etc/apache2/conf.d/passenger.conf
+# LoadModule passenger_module /usr/local/lib/ruby/gems/1.8/gems/passenger-2.2.2/ext/apache2/mod_passenger.so
+# PassengerRoot /usr/local/lib/ruby/gems/1.8/gems/passenger-2.2.2
+# PassengerRuby /usr/local/bin/ruby
+
+# todo: mv /etc/apache2/sites-available/default to /etc/apache2/sites-available/_default
+# todo: add the following to apache config : /etc/apache2/sites-available/default
+# <VirtualHost *:80>
+#    ServerName www.yourhost.com
+#    DocumentRoot /somewhere/public    # <-- be sure to point to 'public'!
+# </VirtualHost>
+
