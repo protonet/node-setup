@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # needed for ftp downloads
+export http_proxy=http://protodeploy:3128/
 export ftp_proxy=http://protodeploy:3128/
 
 # the archive of the post-install scripts

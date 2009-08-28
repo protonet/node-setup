@@ -21,8 +21,7 @@ cd ..
 rm -rf $RUBY
 
 # now to rubygems
-RUBYGEMS="rubygems-1.3.2" 
-wget http://rubyforge.iasi.roedu.net/files/rubygems/$RUBYGEMS.tgz
+RUBYGEMS="rubygems-1.3.5" 
 tar xzf $RUBYGEMS.tgz
 rm $RUBYGEMS.tgz
 cd $RUBYGEMS
@@ -48,14 +47,14 @@ sudo gem install passenger
 # sudo passenger-install-apache2-module
 
 # todo: add the following to apache config: /etc/apache2/conf.d/passenger.conf
-# LoadModule passenger_module /usr/local/lib/ruby/gems/1.8/gems/passenger-2.2.2/ext/apache2/mod_passenger.so
-# PassengerRoot /usr/local/lib/ruby/gems/1.8/gems/passenger-2.2.2
+# LoadModule passenger_module /usr/local/lib/ruby/gems/1.8/gems/passenger-2.2.4/ext/apache2/mod_passenger.so
+# PassengerRoot /usr/local/lib/ruby/gems/1.8/gems/passenger-2.2.4
 # PassengerRuby /usr/local/bin/ruby
 
 # todo: mv /etc/apache2/sites-available/default to /etc/apache2/sites-available/_default
 # todo: add the following to apache config : /etc/apache2/sites-available/default
 # <VirtualHost *:80>
-#    ServerName www.yourhost.com
-#    DocumentRoot /somewhere/public    # <-- be sure to point to 'public'!
+#    ServerName protonet
+#    DocumentRoot /home/protonet/dashboard/public
 # </VirtualHost>
 

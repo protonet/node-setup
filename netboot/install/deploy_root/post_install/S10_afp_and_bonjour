@@ -6,7 +6,7 @@
 
 cd
 
-sudo aptitude install cracklib2-dev libssl-dev
+sudo apt-get install -y cracklib2-dev libssl-dev
 
 mkdir netatalk
 cd netatalk
