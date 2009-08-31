@@ -1,0 +1,67 @@
+#!/bin/sh
+
+# http://www.zaphu.com/2008/04/29/ubuntu-guide-configure-a-netatalk-file-server-based-on-apple-filing-protocol-afp/ (got a pdf of it)
+# http://www.zaphu.com/2008/04/29/ubuntu-guide-configure-avahi-to-broadcast-services-via-bonjour-to-mac-os-x/
+# and newer version:
+# http://www.kremalicious.com/2008/06/ubuntu-as-mac-file-server-and-time-machine-volume/ (got a pdf of it)
+# ATTN: we need to build this frickin' thing by frickin' hand:
+
+cd
+
+sudo apt-get build-dep netatalk
+sudo apt-get install cracklib2-dev fakeroot libssl-dev
+sudo apt-get source netatalk
+cd netatalk-2*
+
+sudo DEB_BUILD_OPTIONS=ssl dpkg-buildpackage -rfakeroot
+
+# IMPORTANT: THIS NEEDS TO BE DONE
+# OR YOU MIGHT GET THE FOLLOWING ERROR
+#
+# {~} % sudo dpkg -i netatalk_2.0.4\~beta2-5ubuntu1_i386.deb
+# Selecting previously deselected package netatalk.
+# (Reading database ... 87507 files and directories currently installed.)
+# Unpacking netatalk (from netatalk_2.0.4~beta2-5ubuntu1_i386.deb) ...
+# Setting up netatalk (2.0.4~beta2-5ubuntu1) ...
+# Starting Netatalk services (this will take a while): nbp_rgstr: Connection timed out
+# Can't register protonet-5:Workstation@*
+# invoke-rc.d: initscript netatalk, action "start" failed.
+# dpkg: error processing netatalk (--install):
+#  subprocess post-installation script returned error exit status 1
+# Processing triggers for man-db ...
+# Errors were encountered while processing:
+#  netatalk
+#
+# todo manual
+# sudo vim /etc/netatalk/atalkd.conf
+#  and add:
+#  eth0
+#  n2n0
+sudo dpkg -i ~/netatalk_2*.deb
+
+# now set it to hold no further ubuntu updates
+sudo dpkg --set-selections < echo "netatalk hold"
+
+sudo aptitude install avahi-daemon
+
+# make it autostart
+sudo update-rc.d avahi-daemon defaults
+
+# sudo vim /etc/avahi/services/afpd.service
+
+# <?xml version="1.0" standalone='no'?><!--*-nxml-*-->
+# <!DOCTYPE service-group SYSTEM "avahi-service.dtd">
+# <service-group>
+# <name replace-wildcards="yes">%h</name>
+# <service>
+# <type>_afpovertcp._tcp</type>
+# <port>548</port>
+# </service>
+# </service-group>
+
+# sudo /etc/init.d/avahi-daemon restart
+
+# for debug purposes
+# sudo apt-get install mdns-scan
+
+# TEST : you can see the folder for protonet in the finder
