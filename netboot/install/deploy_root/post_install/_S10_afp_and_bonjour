@@ -59,6 +59,19 @@ sudo update-rc.d avahi-daemon defaults
 # </service>
 # </service-group>
 
+# sudo vim /etc/avahi/services/protonet.service
+
+# <?xml version="1.0" standalone='no'?><!--*-nxml-*-->
+# <!DOCTYPE service-group SYSTEM "avahi-service.dtd">
+# <service-group>
+# <name replace-wildcards="yes">%h</name>
+# <service>
+# <type>_protonet._tcp</type>
+# <port>12345</port>
+# </service>
+# </service-group>
+
+
 # sudo /etc/init.d/avahi-daemon restart
 
 # for debug purposes
