@@ -42,6 +42,9 @@ sudo dpkg -i ~/netatalk_2*.deb
 # now set it to hold no further ubuntu updates
 sudo dpkg --set-selections < echo "netatalk hold"
 
+# cleanup installation
+sudo rm -rf netatalk*
+
 sudo aptitude install avahi-daemon
 
 # make it autostart
