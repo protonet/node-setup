@@ -1,0 +1,21 @@
+#!/bin/sh
+
+# CHANGE NODE HOSTNAME
+
+# sudo vim /etc/hosts
+# change 
+# 127.0.0.1 protonet
+# to
+# 127.0.0.1 protonet-X (where X is the node number - FIXME: change to something else later on)
+
+# sudo vim /etc/hostname
+# change
+# protonet
+# to
+# protonet-X (see above - FIXME: see above)
+
+# sudo hostname protonet-7
+# sudo /etc/init.d/hostname.sh stop
+# sudo /etc/init.d/hostname.sh start
+
+# sudo /etc/init.d/networking restart

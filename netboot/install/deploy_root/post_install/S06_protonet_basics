@@ -38,10 +38,17 @@ apt-get -y install sqlite3 libsqlite3-dev
 # add github as source
 gem sources -a http://gems.github.com
 
-# installing the apps gems
-sudo gem install jeremymcanally-context faker random_data mocha configatron sprockets ruby-debug
+# needed for rmagick
+sudo apt-get install libmagick9-dev
 
-sudo gem install passenger
+# installing the apps gems
+sudo gem install jeremymcanally-context faker random_data mocha configatron sprockets ruby-debug --no-rdoc --no-ri
+
+sudo gem install eventmachine tmm1-amqp json sqlite3-ruby --no-rdoc --no-ri
+
+
+
+sudo gem install passenger --no-rdoc --no-ri
 
 # todo: add later or something similar, this is interactive
 # sudo passenger-install-apache2-module

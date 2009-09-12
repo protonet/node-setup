@@ -36,7 +36,8 @@ sudo DEB_BUILD_OPTIONS=ssl dpkg-buildpackage -rfakeroot
 # sudo vim /etc/netatalk/atalkd.conf
 #  and add:
 #  eth0
-#  n2n0
+#  ath0
+#  n2n0 bzw. edge0
 sudo dpkg -i ~/netatalk_2*.deb
 
 # now set it to hold no further ubuntu updates
