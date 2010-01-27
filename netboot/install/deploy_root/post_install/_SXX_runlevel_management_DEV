@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# http://ubuntuforums.org/showthread.php?t=89491&highlight=boot
+sudo apt-get install sysv-rc-conf

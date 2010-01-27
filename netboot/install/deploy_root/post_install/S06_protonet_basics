@@ -30,24 +30,21 @@ cd ..
 rm -rf $RUBYGEMS
 
 # how about a webserver ;)
-apt-get -y install apache2 apache2-threaded-dev
+sudo apt-get -y install apache2 apache2-threaded-dev
 
 # getting the db
-apt-get -y install sqlite3 libsqlite3-dev
+sudo apt-get -y install sqlite3 libsqlite3-dev
 
 # add github as source
 gem sources -a http://gems.github.com
 
 # needed for rmagick
-sudo apt-get install libmagick9-dev
+sudo apt-get install libmagickwand-dev
 
 # installing the apps gems
-sudo gem install jeremymcanally-context faker random_data mocha configatron sprockets ruby-debug --no-rdoc --no-ri
+sudo gem install jeremymcanally-context faker random_data mocha configatron sprockets ruby-debug eventmachine tmm1-amqp json sqlite3-ruby daemons ruby-net-ldap rmagick --no-rdoc --no-ri
 
-sudo gem install eventmachine tmm1-amqp json sqlite3-ruby --no-rdoc --no-ri
-
-
-
+# install passenger
 sudo gem install passenger --no-rdoc --no-ri
 
 # todo: add later or something similar, this is interactive
@@ -62,6 +59,10 @@ sudo gem install passenger --no-rdoc --no-ri
 # todo: add the following to apache config : /etc/apache2/sites-available/default
 # <VirtualHost *:80>
 #    ServerName protonet
-#    DocumentRoot /home/protonet/dashboard/public
+#    DocumentRoot /home/protonet/dashboard/current/public
 # </VirtualHost>
 
+# needed to keep awk the same as on our dev machines...
+sudo apt-get install original-awk-
+
+####### END

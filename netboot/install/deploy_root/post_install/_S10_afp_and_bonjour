@@ -41,7 +41,7 @@ sudo DEB_BUILD_OPTIONS=ssl dpkg-buildpackage -rfakeroot
 sudo dpkg -i ~/netatalk_2*.deb
 
 # now set it to hold no further ubuntu updates
-sudo dpkg --set-selections < echo "netatalk hold"
+echo "netatalk hold" | sudo dpkg --set-selections
 
 # cleanup installation
 sudo rm -rf netatalk*

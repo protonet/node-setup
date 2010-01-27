@@ -1,14 +1,16 @@
 #!/bin/sh
 
+# FIXME REVIEW THIS!! IT IS NOT NEEDED ANYMORE!
+
 # the archive of the dashboard application
-POST_ARCH=dashboard_app.tar.bz2
-POST_SERV="http://protodeploy/$POST_ARCH"
-POST_DIR=~/dashboard
+# POST_ARCH=dashboard_app.tar.bz2
+# POST_SERV="http://protodeploy/$POST_ARCH"
+# POST_DIR=~/dashboard
 
 # get and extract the dashboard app
-wget --no-check-certificate $POST_SERV
-tar xjvf $POST_ARCH ./dashboard
-rm -rf $POST_ARCH
+# wget --no-check-certificate $POST_SERV
+# tar xjvf $POST_ARCH ./dashboard
+# rm -rf $POST_ARCH
 
 
 # todo: need to install app gems

@@ -16,7 +16,12 @@ echo '#!/bin/sh
 
 PATH=/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
-/usr/bin/n2n list' > /etc/init.d/n2n
+PATH=/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+edge -f -a 10.0.0.4 -k encryptme -c mynetwork -l flyingseagull.de:1099' > /etc/init.d/n2n
+
+# FIXME get the ip dynamically
+# /usr/bin/n2n list' > /etc/init.d/n2n
 
 chmod +x /etc/init.d/n2n
 # add the startup script to the autostart
